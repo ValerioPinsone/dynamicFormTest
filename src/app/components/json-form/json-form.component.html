@@ -3,9 +3,10 @@
     <label>{{ control.label }}</label>
     <input
       [type]="control.type"
-      [formControlName]="control.name"
+      [name]="control.name"
       [value]="control.value"
-    >
-  <button type="submit">Submit</button>
+    />
+
   </div>
+  <button type="submit">Submit</button>
 </form>
