@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 interface JsonFormValidators {
@@ -33,19 +33,20 @@ export interface JsonFormData {
 
 @Component({
   selector: 'app-json-form',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './json-form.component.html',
   styleUrls: ['./json-form.component.css']
 })
-export class JsonFormComponent {
+export class JsonFormComponent implements OnChanges{
   @Input() jsonFormData: any;
   public myForm: FormGroup = this.fb.group({});
   constructor(private fb: FormBuilder) {}
 
-/*   ngOnChanges(changes: SimpleChanges) {
+  ngOnChanges(changes: SimpleChanges) {
     if (!changes['jsonFormData'].firstChange) {
-      console.log(this.jsonFormData);
+      this.createForm(this.jsonFormData.controls);
     }
-  } */
+  }
 
 
   createForm(controls: JsonFormControls[]) {
@@ -103,7 +104,7 @@ export class JsonFormComponent {
 
   onSubmit() {
     console.log('Form valid: ', this.myForm.valid);
-    console.log('Form values: ', this.myForm.value);
+    console.log('Form values: ', this.myForm);
   }
 
 
