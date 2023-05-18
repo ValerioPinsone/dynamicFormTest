@@ -29,6 +29,8 @@ interface JsonFormControls {
 }
 export interface JsonFormData {
   controls: JsonFormControls[];
+  perfexia: any;
+  formDefinition: any;
 }
 
 @Component({
@@ -40,10 +42,10 @@ export class JsonFormComponent {
   @Input() jsonFormData: any;
   public myForm: FormGroup = this.fb.group({});
   constructor(private fb: FormBuilder) {}
-
-/*   ngOnChanges(changes: SimpleChanges) {
+  /*
+  ngOnChanges(changes: SimpleChanges) {
     if (!changes['jsonFormData'].firstChange) {
-      console.log(this.jsonFormData);
+      this.createForm(this.jsonFormData);
     }
   } */
 
@@ -105,6 +107,14 @@ export class JsonFormComponent {
     console.log('Form valid: ', this.myForm.valid);
     console.log('Form values: ', this.myForm.value);
   }
+
+  countKey(array: number){return Object.keys(array).length}
+
+  createArray(numeroChiavi: number){return new Array(numeroChiavi).fill(1)}
+
+  controlType(JsonDataSegment: any){return JsonDataSegment && JsonDataSegment.params.field?.type ? JsonDataSegment.params.field.type : JsonDataSegment?.type }
+
+  scope(objectToScope: any){console.log(objectToScope)}
 
 
 
