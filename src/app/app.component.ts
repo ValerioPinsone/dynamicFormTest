@@ -16,9 +16,10 @@ export class AppComponent implements OnInit{
 
   ngOnInit() {
     console.log("ngoninit");
-    this.http.get('../assets/my-form.json').subscribe((formData) => {
+    this.http.get('../assets/my-form-custom.json').subscribe((formData) => {
         this.formData = formData as JsonFormData;
-        console.log(this.formData);
+       // console.log(this.formData);
+      //  console.log(Object.keys(this.formData.formDefinition.fields[0].fields));
       });
   }
 }

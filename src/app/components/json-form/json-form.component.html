@@ -1,12 +1,29 @@
 <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
-  <div *ngFor="let control of jsonFormData?.controls">
-    <label>{{ control.label }}</label>
-    <input
-      [type]="control.type"
-      [name]="control.name"
-      [value]="control.value"
-    />
+  <h3>{{jsonFormData?.description}}</h3>
+  <h5>{{jsonFormData?.name}}</h5>
+  <div *ngFor="let parag of jsonFormData?.formDefinition.fields">
+    <div *ngFor="let x of createArray(countKey(parag.fields));index as i;">
+            <div *ngFor="let y of createArray(parag?.fields[i+1].length);index as j;">
+                {{parag?.fields[i+1][j]?.name}}
+                <div style="display: inline-flex;" *ngIf="controlType(parag?.fields[i+1][j]) == 'dropdown'">
+                  <select>
+                    <option value=""></option>
+                  </select>
+                </div>
+                <div style="display: inline-flex;" *ngIf="controlType(parag?.fields[i+1][j]) == 'string'">
+                  <input type="text">
+                </div>
+                <div style="display: inline-flex;" *ngIf="controlType(parag?.fields[i+1][j]) == 'text'">
+                  <input type="text">
+                </div>
 
+                <div style="display: inline-flex;" *ngIf="controlType(parag?.fields[i+1][j]) == 'boolean'">
+                 <input type="checkbox">
+                </div>
+            </div>
+    </div> 
   </div>
   <button type="submit">Submit</button>
 </form>
+
+
