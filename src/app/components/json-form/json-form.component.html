@@ -11,14 +11,14 @@
                   </select>
                 </div>
                 <div style="display: inline-flex;" *ngIf="controlType(parag?.fields[i+1][j]) == 'string'">
-                  <input type="text">
+                  <input [formControlName]="parag?.fields[i+1][j].name" type="text">
                 </div>
                 <div style="display: inline-flex;" *ngIf="controlType(parag?.fields[i+1][j]) == 'text'">
-                  <input type="text">
+                  <input [formControlName]="parag?.fields[i+1][j].name" type="text">
                 </div>
 
                 <div style="display: inline-flex;" *ngIf="controlType(parag?.fields[i+1][j]) == 'boolean'">
-                 <input type="checkbox">
+                 <input [formControlName]="parag?.fields[i+1][j].name" type="checkbox">
                 </div>
             </div>
     </div> 
