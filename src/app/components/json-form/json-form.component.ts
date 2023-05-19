@@ -67,10 +67,7 @@ export class JsonFormComponent implements OnChanges {
     }
   }
 
-  onSubmit() {
-    console.log('Form valid: ', this.myForm.valid);
-    console.log('Form values: ', this.myForm.value);
-  }
+  onSubmit() {console.log('Form valid: ', this.myForm.valid); console.log('Form values: ', this.myForm.value);}
 
   countKey(array: number){return Object.keys(array).length}
 
