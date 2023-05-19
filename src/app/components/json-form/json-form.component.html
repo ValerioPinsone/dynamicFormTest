@@ -1,29 +1,51 @@
-<form [formGroup]="myForm" (ngSubmit)="onSubmit()">
-  <h3>{{jsonFormData?.description}}</h3>
-  <h5>{{jsonFormData?.name}}</h5>
-  <div *ngFor="let parag of jsonFormData?.formDefinition.fields">
-    <div *ngFor="let x of createArray(countKey(parag.fields));index as i;">
-            <div *ngFor="let y of createArray(parag?.fields[i+1].length);index as j;">
-                {{parag?.fields[i+1][j]?.name}}
-                <div style="display: inline-flex;" *ngIf="controlType(parag?.fields[i+1][j]) == 'dropdown'">
-                  <select>
-                    <option value=""></option>
-                  </select>
-                </div>
-                <div style="display: inline-flex;" *ngIf="controlType(parag?.fields[i+1][j]) == 'string'">
-                  <input [formControlName]="parag?.fields[i+1][j].name" type="text">
-                </div>
-                <div style="display: inline-flex;" *ngIf="controlType(parag?.fields[i+1][j]) == 'text'">
-                  <input [formControlName]="parag?.fields[i+1][j].name" type="text">
-                </div>
+    <div class="container">
+      <h3>{{jsonFormData?.description}}</h3>
+      <h5>{{jsonFormData?.name}}</h5>
+    <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+      <div *ngFor="let parag of jsonFormData?.formDefinition.fields" >
+      <div *ngIf="parag.type == 'group'">
+        <hr> 
+        <h4> {{parag.name}}</h4>
+        <hr>
+      </div>
+        <div class="row" *ngFor="let x of createArray(countKey(parag.fields));index as i;">
+                <div class="col-sm-6" *ngFor="let y of createArray(parag?.fields[i+1].length);index as j;"  >
+              
+                  <div>
+                    <div *ngIf="controlType(parag?.fields[i+1][j]) == 'dropdown'">
+                      <label class="form-label">{{parag?.fields[i+1][j]?.name}}</label>
+                      <select class="form-select ">
+                        <option value=""></option>
+                      </select>
+                    </div>
+                  </div>
 
-                <div style="display: inline-flex;" *ngIf="controlType(parag?.fields[i+1][j]) == 'boolean'">
-                 <input [formControlName]="parag?.fields[i+1][j].name" type="checkbox">
-                </div>
-            </div>
-    </div> 
-  </div>
-  <button type="submit">Submit</button>
-</form>
+                  <div >
+                    <div *ngIf="controlType(parag?.fields[i+1][j]) == 'string'">
+                      <label class="form-label">{{parag?.fields[i+1][j]?.name}}</label>
+                      <input class="form-control"  [formControlName]="parag?.fields[i+1][j].id" type="text">
+                    </div>
+                  </div>
 
+                  <div >
+                    <div *ngIf="controlType(parag?.fields[i+1][j]) == 'text'">
+                      <label class="form-label">{{parag?.fields[i+1][j]?.name}}</label>
+                      <input class="form-control" [formControlName]="parag?.fields[i+1][j].id" type="text">
+                    </div>
+                  </div>
+
+                  <div >
+                    <div *ngIf="controlType(parag?.fields[i+1][j]) == 'boolean'">
+                      <input class="form-check-input" [formControlName]="parag?.fields[i+1][j].id" type="checkbox">
+                      <label class="form-label">{{parag?.fields[i+1][j]?.name}}</label>
+
+                    </div>
+                  </div>
+                   
+                </div>
+        </div> 
+      </div>
+      <button type="submit">Submit</button>
+    </form>
+    </div>
 

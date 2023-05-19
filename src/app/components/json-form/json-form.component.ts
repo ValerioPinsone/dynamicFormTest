@@ -47,6 +47,7 @@ export class JsonFormComponent implements OnChanges {
   
   ngOnChanges(changes: SimpleChanges) {
     if (!changes['jsonFormData'].firstChange) {
+      console.log(this.jsonFormData)
       this.createForm(this.jsonFormData.formDefinition.fields);
     }
   } 
@@ -54,12 +55,11 @@ export class JsonFormComponent implements OnChanges {
 
   createForm(controls: JsonFormControls[]) {
     for (const control of controls) {
-      //const validatorsToAdd: FormControlOptions | ValidatorFn | ValidatorFn[] | null | JsonFormControls |undefined = [] ;
       for (const [key, value] of Object.entries(control)) {
         if(key == 'fields'){
           for(const row of Object.entries(value)) {
             for(let campo of row[1] as any ) {
-              this.myForm.addControl(campo.name,this.fb.control(campo?.value,Validators.required));
+              this.myForm.addControl(campo.id,this.fb.control(campo?.value,Validators.required));
             }
           }
         }
