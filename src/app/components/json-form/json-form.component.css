@@ -1,11 +1,29 @@
+
+body{
+    background-color:rgb(230, 230, 230) !important;
+}
+
+
+
+.container{
+    margin-top: 30px;
+    border-radius: 20px;
+    border: 1px solid lightgray;
+    background-color:rgb(239, 237, 237) !important;
+}
+
 .inputContainer2{
     width: 47%; 
     display: inline-flex; 
-    margin-left: 8px;
+    margin-left: 20px;
 }
 
 .inputContainer1{
-    width: 93.8%; 
+    width: 94.6%; 
     display: inline-flex; 
-    margin-left: 8px;
+    margin-left: 20px;
+}
+
+.buttonSave{
+    margin-bottom: 10px;
 }
