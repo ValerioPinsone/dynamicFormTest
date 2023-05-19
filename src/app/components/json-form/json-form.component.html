@@ -13,7 +13,9 @@
                   
                     <div *ngIf="controlType(parag?.fields[i+1][j]) == 'dropdown'">
                       <label class="form-label">{{parag?.fields[i+1][j]?.name}} *</label>
-                      <select class="form-select"> <option value=""></option></select>
+                      <select [formControlName]="parag?.fields[i+1][j].id" class="form-select">
+                         <option *ngFor=" let opt of parag?.fields[i+1][j]?.options" [value]="opt.name">{{opt.name}}</option>
+                      </select>
                     </div>
 
                     <div *ngIf="controlType(parag?.fields[i+1][j]) == 'string'">
@@ -39,7 +41,7 @@
                 </div>
         </div> 
       </div>
-      <button type="submit">Submit</button>
+      <button class="btn btn-primary buttonSave" type="submit">Submit</button>
     </form>
     </div>
 

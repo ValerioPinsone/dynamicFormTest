@@ -51,8 +51,8 @@
                             "id": "sceltatipologiaattolabel",
                             "name": "Scelta Tipologia Atto - label",
                             "type": "readonly",
-                            "value": null,
-                            "required": false,
+                            "value": "Selezionare Atto",
+                            "required": true,
                             "readOnly": false,
                             "overrideId": false,
                             "colspan": 1,
@@ -63,8 +63,29 @@
                             "maxValue": null,
                             "regexPattern": null,
                             "optionType": null,
-                            "hasEmptyValue": null,
-                            "options": null,
+                            "hasEmptyValue": true,
+                            "options": [
+                                {
+                                    "id": "empty",
+                                    "name": "Selezionare Atto"
+                                },
+                                {
+                                    "id": "option_1",
+                                    "name": "Atto 1"
+                                },
+                                {
+                                    "id": "option_2",
+                                    "name": "Atto 2"
+                                },
+                                {
+                                    "id": "option_3",
+                                    "name": "Atto 3"
+                                },
+                                {
+                                    "id": "option_4",
+                                    "name": "Atto 4"
+                                }
+                            ],
                             "restUrl": null,
                             "restResponsePath": null,
                             "restIdProperty": null,
