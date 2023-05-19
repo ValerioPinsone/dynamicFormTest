@@ -1,3 +1,11 @@
-.container{
-    
+.inputContainer2{
+    width: 47%; 
+    display: inline-flex; 
+    margin-left: 8px;
+}
+
+.inputContainer1{
+    width: 93.8%; 
+    display: inline-flex; 
+    margin-left: 8px;
 }
