@@ -1,5 +1,5 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControlOptions, ValidatorFn } from '@angular/forms';
 
 interface JsonFormValidators {
   min?: number;
@@ -38,69 +38,33 @@ export interface JsonFormData {
   templateUrl: './json-form.component.html',
   styleUrls: ['./json-form.component.css']
 })
-export class JsonFormComponent {
+export class JsonFormComponent implements OnChanges {
   @Input() jsonFormData: any;
   public myForm: FormGroup = this.fb.group({});
+  public row!: JsonFormControls;
+  campo: any;
   constructor(private fb: FormBuilder) {}
-  /*
+  
   ngOnChanges(changes: SimpleChanges) {
     if (!changes['jsonFormData'].firstChange) {
-      this.createForm(this.jsonFormData);
+      this.createForm(this.jsonFormData.formDefinition.fields);
     }
-  } */
+  } 
 
 
   createForm(controls: JsonFormControls[]) {
     for (const control of controls) {
-      const validatorsToAdd = [];
-      for (const [key, value] of Object.entries(control.validators)) {
-        switch (key) {
-          case 'min':
-            validatorsToAdd.push(Validators.min(value));
-            break;
-          case 'max':
-            validatorsToAdd.push(Validators.max(value));
-            break;
-          case 'required':
-            if (value) {
-              validatorsToAdd.push(Validators.required);
+      //const validatorsToAdd: FormControlOptions | ValidatorFn | ValidatorFn[] | null | JsonFormControls |undefined = [] ;
+      for (const [key, value] of Object.entries(control)) {
+        if(key == 'fields'){
+          for(const row of Object.entries(value)) {
+            for(let campo of row[1] as any ) {
+              this.myForm.addControl(campo.name,this.fb.control(campo?.value,Validators.required));
             }
-            break;
-          case 'requiredTrue':
-            if (value) {
-              validatorsToAdd.push(Validators.requiredTrue);
-            }
-            break;
-          case 'email':
-            if (value) {
-              validatorsToAdd.push(Validators.email);
-            }
-            break;
-          case 'minLength':
-            validatorsToAdd.push(Validators.minLength(value));
-            break;
-          case 'maxLength':
-            validatorsToAdd.push(Validators.maxLength(value));
-            break;
-          case 'pattern':
-            validatorsToAdd.push(Validators.pattern(value));
-            break;
-          case 'nullValidator':
-            if (value) {
-              validatorsToAdd.push(Validators.nullValidator);
-            }
-            break;
-          default:
-            break;
+          }
         }
       }
-      this.myForm.addControl(
-        control.name,
-        this.fb.control(control.value, validatorsToAdd)
-
-      );
     }
-
   }
 
   onSubmit() {
