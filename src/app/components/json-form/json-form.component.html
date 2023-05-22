@@ -1,12 +1,11 @@
     <div class="container">
       <h3>{{jsonFormData?.description}}</h3>
-      <h5>{{jsonFormData?.name}}</h5>
     <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
       <div *ngFor="let parag of jsonFormData?.formDefinition.fields" >
       <div *ngIf="parag.type == 'group'">
-        <br>
+
         <h4> {{parag.name}}</h4>
-        <hr>
+        <hr style="height:3px;background-color: black;">
       </div>
         <div class="row inputContainer{{parag.numberOfColumns}}" *ngFor="let x of createArray(countKey(parag.fields));index as i;">
                 <div class="col-sm-12" *ngFor="let y of createArray(parag?.fields[i+1].length);index as j;"  >
@@ -37,6 +36,18 @@
                       <label class="form-label">{{parag?.fields[i+1][j]?.name}} *</label>
                     </div>
 
+
+                    <div *ngIf="controlType(parag?.fields[i+1][j]) == 'multi-line-text'">
+                      <label class="form-label">{{parag?.fields[i+1][j]?.name}} *</label>
+                      <textarea row="1" cols="50" class="form-control" [formControlName]="parag?.fields[i+1][j].id" style="resize: none;"></textarea>
+                    </div>
+
+                    <div *ngIf="controlType(parag?.fields[i+1][j]) == 'upload'">
+                      <label class="form-label">{{parag?.fields[i+1][j]?.name}} *</label>
+                      <input class="form-control" type="file" id="formFile">
+                    </div>
+                  
+                   
 
                 </div>
         </div>
