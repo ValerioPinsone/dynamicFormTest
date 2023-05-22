@@ -4,17 +4,17 @@
     <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
       <div *ngFor="let parag of jsonFormData?.formDefinition.fields" >
       <div *ngIf="parag.type == 'group'">
-        <hr> 
+        <br>
         <h4> {{parag.name}}</h4>
         <hr>
       </div>
         <div class="row inputContainer{{parag.numberOfColumns}}" *ngFor="let x of createArray(countKey(parag.fields));index as i;">
                 <div class="col-sm-12" *ngFor="let y of createArray(parag?.fields[i+1].length);index as j;"  >
-                  
+
                     <div *ngIf="controlType(parag?.fields[i+1][j]) == 'dropdown'">
                       <label class="form-label">{{parag?.fields[i+1][j]?.name}} *</label>
                       <select [formControlName]="parag?.fields[i+1][j].id" class="form-select">
-                         <option *ngFor=" let opt of parag?.fields[i+1][j]?.options" [value]="opt.name">{{opt.name}}</option>
+                         <option *ngFor=" let opt of parag?.fields[i+1][j]?.options" [value]="opt.id">{{opt.name}}</option>
                       </select>
                     </div>
 
@@ -22,24 +22,24 @@
                       <label class="form-label">{{parag?.fields[i+1][j]?.name}} *</label>
                       <input class="form-control"  [formControlName]="parag?.fields[i+1][j].id" type="text">
                     </div>
-                 
 
-                  
+
+
                     <div *ngIf="controlType(parag?.fields[i+1][j]) == 'text'">
                       <label class="form-label">{{parag?.fields[i+1][j]?.name}} *</label>
                       <input class="form-control" [formControlName]="parag?.fields[i+1][j].id" type="text">
                     </div>
-                  
 
-                  
+
+
                     <div *ngIf="controlType(parag?.fields[i+1][j]) == 'boolean'">
                       <input class="form-check-input" [formControlName]="parag?.fields[i+1][j].id" type="checkbox">
                       <label class="form-label">{{parag?.fields[i+1][j]?.name}} *</label>
                     </div>
-                  
-                   
+
+
                 </div>
-        </div> 
+        </div>
       </div>
       <button class="btn btn-primary buttonSave" type="submit">Submit</button>
     </form>
