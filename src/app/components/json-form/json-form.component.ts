@@ -47,11 +47,9 @@ export class JsonFormComponent implements OnChanges {
   
   ngOnChanges(changes: SimpleChanges) {
     if (!changes['jsonFormData'].firstChange) {
-      console.log(this.jsonFormData)
-      this.createForm(this.jsonFormData.formDefinition.fields);
+       this.createForm(this.jsonFormData.formDefinition.fields);
     }
   } 
-
 
   createForm(controls: JsonFormControls[]) {
     for (const control of controls) {
@@ -76,7 +74,5 @@ export class JsonFormComponent implements OnChanges {
   controlType(JsonDataSegment: any){return JsonDataSegment && JsonDataSegment.params.field?.type ? JsonDataSegment.params.field.type : JsonDataSegment?.type }
 
   scope(objectToScope: any){console.log(objectToScope)}
-
-
 
 }
